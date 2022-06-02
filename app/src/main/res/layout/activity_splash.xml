@@ -8,18 +8,17 @@
     <ImageView
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:src="@drawable/splash_circles"
+        android:src="@drawable/splash_circle_top"
         android:translationX="-140dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:layout_width="380dp"
-        android:layout_height="380dp"
-        android:src="@drawable/splash_circles"
-        android:translationX="140dp"
-        android:translationY="120dp"
-        android:rotation="240"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:src="@drawable/splash_circle_bottom"
+        android:translationX="160dp"
+        android:translationY="180dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
 
