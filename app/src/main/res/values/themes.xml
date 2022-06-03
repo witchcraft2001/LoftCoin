@@ -1,0 +1,10 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.LoftCoin" parent="Theme.MaterialComponents.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/dark_six</item>
+        <item name="colorSecondary">@color/grey_blue</item>
+        <item name="android:colorBackground">?attr/colorPrimary</item>
+        <!-- Customize your theme here. -->
+    </style>
+</resources>
