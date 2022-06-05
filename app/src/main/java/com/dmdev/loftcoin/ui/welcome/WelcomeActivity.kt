@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
 import com.dmdev.loftcoin.R
 import com.dmdev.loftcoin.databinding.ActivityWelcomeBinding
+import com.dmdev.loftcoin.ui.views.PointIndicator
 
 class WelcomeActivity : AppCompatActivity() {
     companion object {
@@ -25,6 +26,8 @@ class WelcomeActivity : AppCompatActivity() {
         binding.recycler.also {
             it.layoutManager = LinearLayoutManager(this,RecyclerView.HORIZONTAL, false)
             it.adapter = WelcomeAdapter()
+            it.setHasFixedSize(true)
+            it.addItemDecoration(PointIndicator(this))
             helper.attachToRecyclerView(it)
         }
     }
