@@ -1,4 +1,4 @@
-package com.dmdev.loftcoin.activities
+package com.dmdev.loftcoin.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

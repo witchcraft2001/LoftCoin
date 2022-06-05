@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">LoftCoin</string>
+    <string name="welcome_page_start_button">Начать работу</string>
+    <string name="welcome_page_title_1">Покупка и продажа</string>
+    <string name="welcome_page_subtitle_1">Покупай когда дешево, продавай когда дорого.</string>
+    <string name="welcome_page_title_2">Курс криптовалют</string>
+    <string name="welcome_page_subtitle_2">Следи за курсом валют и вовремя реагируй на изменения динамики цены.</string>
+    <string name="welcome_page_title_3">Конвертер валют</string>
+    <string name="welcome_page_subtitle_3">Узнай сколько эфира в одном биткоине.</string>
+
 </resources>
