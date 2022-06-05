@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.dmdev.loftcoin.R
 import com.dmdev.loftcoin.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -18,11 +17,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        //        findNavController()
         with(binding) {
-//            bottomNavigationView.setupWithNavController(
-//                findNavController(R.id.fragmentContainerView)
-//            )
             bottomNavigationView.setupWithNavController(fragmentContainerView.findNavController())
         }
     }
