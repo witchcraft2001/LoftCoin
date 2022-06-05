@@ -20,6 +20,7 @@
     <color name="dark_seven">#10101a</color>
     <color name="blue_grey">#9c9eb9</color>
     <color name="white">#ffffff</color>
+    <color name="white30">#4cffffff</color>
     <color name="watermelon">#ff4465</color>
     <color name="ic_launcher_background">#191A29</color>
 </resources>
