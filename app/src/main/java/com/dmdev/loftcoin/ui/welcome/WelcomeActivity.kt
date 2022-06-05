@@ -1,13 +1,16 @@
 package com.dmdev.loftcoin.ui.welcome
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
 import com.dmdev.loftcoin.R
 import com.dmdev.loftcoin.databinding.ActivityWelcomeBinding
+import com.dmdev.loftcoin.ui.main.MainActivity
 import com.dmdev.loftcoin.ui.views.PointIndicator
 
 class WelcomeActivity : AppCompatActivity() {
@@ -29,6 +32,11 @@ class WelcomeActivity : AppCompatActivity() {
             it.setHasFixedSize(true)
             it.addItemDecoration(PointIndicator(this))
             helper.attachToRecyclerView(it)
+        }
+        binding.button.setOnClickListener {
+            PreferenceManager.getDefaultSharedPreferences(this).edit().putBoolean(KEY_SHOW_WELCOME, false).apply()
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }
     }
 
