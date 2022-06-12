@@ -84,3 +84,5 @@ lint/tmp/
 .idea/
 
 .DS_Store
+
+api.properties
