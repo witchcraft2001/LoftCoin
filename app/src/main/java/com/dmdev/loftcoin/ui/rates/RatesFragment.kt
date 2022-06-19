@@ -34,7 +34,7 @@ class RatesFragment @Inject constructor(baseComponent: BaseComponent) : Fragment
     }
 
     private fun initObservers() {
-        viewModel.listings.observe(viewLifecycleOwner) { list ->
+        viewModel.coins.observe(viewLifecycleOwner) { list ->
             ratesAdapter.submitList(list)
         }
         viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
