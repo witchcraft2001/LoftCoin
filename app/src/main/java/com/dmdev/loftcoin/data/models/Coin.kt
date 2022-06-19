@@ -1,7 +1,10 @@
 package com.dmdev.loftcoin.data.models
 
-data class Coin(
-    val id: Int,
-    val name: String,
+interface Coin {
+    val id: Long
+    val name: String
     val symbol: String
-)
+    val rank: Int
+    val price: Double
+    val change24h: Double
+}

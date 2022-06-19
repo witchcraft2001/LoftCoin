@@ -1,12 +1,15 @@
 package com.dmdev.loftcoin.di.modules
 
+import android.content.Context
+import androidx.room.Room
 import com.dmdev.loftcoin.BuildConfig
 import com.dmdev.loftcoin.data.api.ApiKeyInterceptor
 import com.dmdev.loftcoin.data.api.CmcApi
-import com.dmdev.loftcoin.data.models.Coin
+import com.dmdev.loftcoin.data.models.CmcCoin
 import com.dmdev.loftcoin.data.models.Listings
 import com.dmdev.loftcoin.data.repository.CmcCoinsRepo
 import com.dmdev.loftcoin.data.repository.CoinsRepo
+import com.dmdev.loftcoin.data.room.LoftCoinDatabase
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Binds
@@ -45,7 +48,7 @@ abstract class DataModule {
         fun getMoshi(): Moshi {
             val moshi = Moshi.Builder().addLast(KotlinJsonAdapterFactory()).build()
             return moshi.newBuilder()
-                .add(Coin::class.java, moshi.adapter(Coin::class.java))
+                .add(CmcCoin::class.java, moshi.adapter(CmcCoin::class.java))
                 .add(Listings::class.java, moshi.adapter(Listings::class.java))
                 .build()
         }
@@ -62,6 +65,11 @@ abstract class DataModule {
 
         @Provides
         fun getCmcApi(retrofit: Retrofit): CmcApi = retrofit.create(CmcApi::class.java)
+
+        @Provides
+        @Singleton
+        fun getDatabase(context: Context) =
+            Room.databaseBuilder(context, LoftCoinDatabase::class.java, "loftcoins.db").build()
     }
 
 }

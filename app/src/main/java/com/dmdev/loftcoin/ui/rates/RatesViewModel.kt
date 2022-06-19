@@ -3,7 +3,7 @@ package com.dmdev.loftcoin.ui.rates
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.dmdev.loftcoin.data.models.Coin
+import com.dmdev.loftcoin.data.models.CmcCoin
 import com.dmdev.loftcoin.data.repository.CoinsRepo
 import java.util.concurrent.Executors
 import java.util.concurrent.Future
@@ -14,8 +14,8 @@ class RatesViewModel @Inject constructor(private val ratesRepo: CoinsRepo): View
     private val executor = Executors.newSingleThreadExecutor()
     private var future: Future<*>? = null
 
-    private val _listings = MutableLiveData<List<Coin>>()
-    val listings: LiveData<List<Coin>> = _listings
+    private val _listings = MutableLiveData<List<CmcCoin>>()
+    val listings: LiveData<List<CmcCoin>> = _listings
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
