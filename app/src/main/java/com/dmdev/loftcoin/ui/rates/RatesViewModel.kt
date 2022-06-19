@@ -4,12 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dmdev.loftcoin.data.models.Coin
-import com.dmdev.loftcoin.data.repository.CmcCoinsRepo
+import com.dmdev.loftcoin.data.repository.CoinsRepo
 import java.util.concurrent.Executors
 import java.util.concurrent.Future
+import javax.inject.Inject
 
-class RatesViewModel : ViewModel() {
-//    private val ratesRepo = CmcCoinsRepo()
+class RatesViewModel @Inject constructor(private val ratesRepo: CoinsRepo): ViewModel() {
 
     private val executor = Executors.newSingleThreadExecutor()
     private var future: Future<*>? = null
@@ -26,16 +26,16 @@ class RatesViewModel : ViewModel() {
 
     fun refresh() {
         _isLoading.postValue(true)
-//        future = executor.submit {
-//            try {
-//                val listings = ratesRepo.listings("USD")
-//                _listings.postValue(listings)
-//            } catch (e: Throwable) {
-//                e.printStackTrace()
-//            } finally {
-//                _isLoading.postValue(false)
-//            }
-//        }
+        future = executor.submit {
+            try {
+                val listings = ratesRepo.listings("USD")
+                _listings.postValue(listings)
+            } catch (e: Throwable) {
+                e.printStackTrace()
+            } finally {
+                _isLoading.postValue(false)
+            }
+        }
     }
 
     override fun onCleared() {

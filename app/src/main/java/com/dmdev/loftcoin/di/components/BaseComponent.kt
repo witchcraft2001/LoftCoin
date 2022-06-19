@@ -1,4 +1,4 @@
-package com.dmdev.loftcoin.di
+package com.dmdev.loftcoin.di.components
 
 import android.content.Context
 import com.dmdev.loftcoin.data.repository.CoinsRepo

@@ -1,4 +1,4 @@
-package com.dmdev.loftcoin.di
+package com.dmdev.loftcoin.di.components
 
 import com.dmdev.loftcoin.di.modules.MainModule
 import com.dmdev.loftcoin.ui.main.MainActivity

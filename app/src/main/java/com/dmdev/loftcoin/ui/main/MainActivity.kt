@@ -8,8 +8,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.dmdev.loftcoin.LoftCoinApp
 import com.dmdev.loftcoin.databinding.ActivityMainBinding
-import com.dmdev.loftcoin.di.DaggerMainComponent
-import com.dmdev.loftcoin.di.MainComponent
+import com.dmdev.loftcoin.di.components.DaggerMainComponent
+import com.dmdev.loftcoin.di.components.MainComponent
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
