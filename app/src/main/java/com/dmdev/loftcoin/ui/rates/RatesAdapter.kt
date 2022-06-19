@@ -5,11 +5,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.dmdev.loftcoin.BuildConfig
 import com.dmdev.loftcoin.R
 import com.dmdev.loftcoin.data.models.Coin
 import com.dmdev.loftcoin.databinding.LayoutItemRatesBinding
+import com.dmdev.loftcoin.utils.PriceFormatter
+import com.squareup.picasso.Picasso
+import java.util.*
 
-class RatesAdapter : ListAdapter<Coin, RatesAdapter.ViewHolder>(DiffUtilCallback) {
+class RatesAdapter(private val priceFormatter: PriceFormatter) : ListAdapter<Coin, RatesAdapter.ViewHolder>(DiffUtilCallback) {
     object DiffUtilCallback : DiffUtil.ItemCallback<Coin>() {
         override fun areItemsTheSame(oldItem: Coin, newItem: Coin): Boolean =
             oldItem.id == newItem.id
@@ -35,8 +39,8 @@ class RatesAdapter : ListAdapter<Coin, RatesAdapter.ViewHolder>(DiffUtilCallback
         val item = getItem(position)
         with(holder.binding) {
             textName.text = item.name
-            textPrice.text = item.price.toString()
-            textChange.text = item.change24h.toString()
+            textPrice.text = priceFormatter.format(item.price)
+            textChange.text = String.format(Locale.US, "%.3f%%", item.change24h)
             textChange.setTextColor(
                 holder.itemView.context.resources.getColor(
                     if (item.change24h >= 0) {
@@ -46,6 +50,9 @@ class RatesAdapter : ListAdapter<Coin, RatesAdapter.ViewHolder>(DiffUtilCallback
                     }
                 )
             )
+            Picasso.get()
+                .load(BuildConfig.IMG_ENDPOINT.replace("{id}", item.id.toString()))
+                .into(image)
         }
     }
 }
