@@ -12,15 +12,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.dmdev.loftcoin.databinding.FragmentRatesBinding
 import com.dmdev.loftcoin.di.components.BaseComponent
 import com.dmdev.loftcoin.di.components.DaggerRatesComponent
+import com.dmdev.loftcoin.utils.PercentageFormatter
 import com.dmdev.loftcoin.utils.PriceFormatter
 import javax.inject.Inject
 
 class RatesFragment @Inject constructor(
     baseComponent: BaseComponent,
-    priceFormatter: PriceFormatter
+    priceFormatter: PriceFormatter,
+    percentageFormatter: PercentageFormatter
 ) : Fragment() {
     private lateinit var binding: FragmentRatesBinding
-    private val ratesAdapter = RatesAdapter(priceFormatter)
+    private val ratesAdapter = RatesAdapter(priceFormatter, percentageFormatter)
 
     private val viewModel by viewModels<RatesViewModel>{ component.viewModelFactory() }
 
