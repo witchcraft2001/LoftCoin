@@ -9,7 +9,7 @@ import java.util.concurrent.Executors
 import java.util.concurrent.Future
 
 class RatesViewModel : ViewModel() {
-    private val ratesRepo = CmcCoinsRepo()
+//    private val ratesRepo = CmcCoinsRepo()
 
     private val executor = Executors.newSingleThreadExecutor()
     private var future: Future<*>? = null
@@ -26,16 +26,16 @@ class RatesViewModel : ViewModel() {
 
     fun refresh() {
         _isLoading.postValue(true)
-        future = executor.submit {
-            try {
-                val listings = ratesRepo.listings("USD")
-                _listings.postValue(listings)
-            } catch (e: Throwable) {
-                e.printStackTrace()
-            } finally {
-                _isLoading.postValue(false)
-            }
-        }
+//        future = executor.submit {
+//            try {
+//                val listings = ratesRepo.listings("USD")
+//                _listings.postValue(listings)
+//            } catch (e: Throwable) {
+//                e.printStackTrace()
+//            } finally {
+//                _isLoading.postValue(false)
+//            }
+//        }
     }
 
     override fun onCleared() {

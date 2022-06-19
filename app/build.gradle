@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+    id 'kotlin-android'
 }
 
 def apiPropertiesFile = rootProject.file("api.properties")
@@ -48,7 +49,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.preference:preference-ktx:1.2.0'
-    implementation 'androidx.fragment:fragment:1.4.1'
+    implementation 'androidx.fragment:fragment-ktx:1.4.1'
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
@@ -74,4 +75,8 @@ dependencies {
 
     //picasso
     implementation "com.squareup.picasso:picasso:2.71828"
+
+    //Dagger2
+    implementation "com.google.dagger:dagger:$dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
 }

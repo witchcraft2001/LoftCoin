@@ -1,11 +1,13 @@
 package com.dmdev.loftcoin.data.repository
 
-import com.dmdev.loftcoin.data.api.CmcApiProvider
+import com.dmdev.loftcoin.data.api.CmcApi
 import com.dmdev.loftcoin.data.models.Coin
 import java.io.IOException
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class CmcCoinsRepo : CoinsRepo {
-    private val api = CmcApiProvider.instance
+@Singleton
+class CmcCoinsRepo @Inject constructor(private val api: CmcApi) : CoinsRepo {
 
     override fun listings(currency: String): List<Coin> {
         val result = api.listings(currency).execute()

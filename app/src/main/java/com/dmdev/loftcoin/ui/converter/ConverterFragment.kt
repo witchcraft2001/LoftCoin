@@ -6,8 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.dmdev.loftcoin.databinding.FragmentConverterBinding
+import javax.inject.Inject
 
-class ConverterFragment : Fragment() {
+class ConverterFragment @Inject constructor() : Fragment() {
     private lateinit var binding: FragmentConverterBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {

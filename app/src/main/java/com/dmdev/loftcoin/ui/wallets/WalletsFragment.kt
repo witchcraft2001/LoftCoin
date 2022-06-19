@@ -6,8 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.dmdev.loftcoin.databinding.FragmentWalletsBinding
+import javax.inject.Inject
 
-class WalletsFragment : Fragment() {
+class WalletsFragment @Inject constructor() : Fragment() {
     private lateinit var binding: FragmentWalletsBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {

@@ -10,8 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dmdev.loftcoin.databinding.FragmentRatesBinding
+import javax.inject.Inject
 
-class RatesFragment : Fragment() {
+class RatesFragment @Inject constructor() : Fragment() {
     private lateinit var binding: FragmentRatesBinding
     private val ratesAdapter = RatesAdapter()
 
