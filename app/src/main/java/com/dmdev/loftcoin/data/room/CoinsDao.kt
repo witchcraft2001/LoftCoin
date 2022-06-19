@@ -1,5 +1,6 @@
 package com.dmdev.loftcoin.data.room
 
+import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
@@ -14,4 +15,8 @@ interface CoinsDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(coins: List<RoomCoin>)
+
+    @WorkerThread
+    @Query("SELECT COUNT(id) FROM RoomCoin")
+    fun coinsCount() : Int
 }
