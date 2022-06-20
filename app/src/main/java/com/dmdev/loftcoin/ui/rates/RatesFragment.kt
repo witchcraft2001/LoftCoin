@@ -10,12 +10,23 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dmdev.loftcoin.databinding.FragmentRatesBinding
+import com.dmdev.loftcoin.di.components.BaseComponent
+import com.dmdev.loftcoin.di.components.DaggerRatesComponent
+import com.dmdev.loftcoin.utils.PercentageFormatter
+import com.dmdev.loftcoin.utils.PriceFormatter
+import javax.inject.Inject
 
-class RatesFragment : Fragment() {
+class RatesFragment @Inject constructor(
+    baseComponent: BaseComponent,
+    priceFormatter: PriceFormatter,
+    percentageFormatter: PercentageFormatter
+) : Fragment() {
     private lateinit var binding: FragmentRatesBinding
-    private val ratesAdapter = RatesAdapter()
+    private val ratesAdapter = RatesAdapter(priceFormatter, percentageFormatter)
 
-    private val viewModel by viewModels<RatesViewModel>()
+    private val viewModel by viewModels<RatesViewModel>{ component.viewModelFactory() }
+
+    private val component = DaggerRatesComponent.builder().baseComponent(baseComponent).build()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         super.onCreateView(inflater, container, savedInstanceState)
@@ -29,7 +40,7 @@ class RatesFragment : Fragment() {
     }
 
     private fun initObservers() {
-        viewModel.listings.observe(viewLifecycleOwner) { list ->
+        viewModel.coins.observe(viewLifecycleOwner) { list ->
             ratesAdapter.submitList(list)
         }
         viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
