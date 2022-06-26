@@ -8,10 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dmdev.loftcoin.BuildConfig
 import com.dmdev.loftcoin.data.models.Wallet
 import com.dmdev.loftcoin.databinding.LayoutItemWalletBinding
+import com.dmdev.loftcoin.utils.PriceFormatter
 import com.squareup.picasso.Picasso
 
-class WalletsAdapter: ListAdapter<Wallet, WalletsAdapter.ViewHolder>(DiffUtilCallback) {
-    object DiffUtilCallback: DiffUtil.ItemCallback<Wallet>() {
+class WalletsAdapter(
+    private val priceFormatter: PriceFormatter
+) : ListAdapter<Wallet, WalletsAdapter.ViewHolder>(DiffUtilCallback) {
+    object DiffUtilCallback : DiffUtil.ItemCallback<Wallet>() {
         override fun areItemsTheSame(oldItem: Wallet, newItem: Wallet): Boolean =
             oldItem.uid == newItem.uid
 
@@ -35,6 +38,8 @@ class WalletsAdapter: ListAdapter<Wallet, WalletsAdapter.ViewHolder>(DiffUtilCal
         val item = getItem(position)
         with(holder.binding) {
             textName.text = item.coin.name
+            textRate.text = priceFormatter.format(item.coin.price)
+            textBalance.text = priceFormatter.format(item.balance, item.coin.symbol)
             Picasso.get()
                 .load(BuildConfig.IMG_ENDPOINT.replace("{id}", item.coin.id.toString()))
                 .into(image)

@@ -23,7 +23,7 @@ class WalletsFragment @Inject constructor(
     priceFormatter: PriceFormatter
 ) : Fragment() {
     private lateinit var binding: FragmentWalletsBinding
-    private val walletsAdapter = WalletsAdapter()
+    private val walletsAdapter = WalletsAdapter(priceFormatter)
 
     private val component = DaggerWalletsComponent.builder().baseComponent(baseComponent).build()
     private val viewModel by viewModels<WalletsViewModel> { component.viewModelFactory() }
@@ -55,10 +55,6 @@ class WalletsFragment @Inject constructor(
                 binding.rvWallets.visibility = if (!it) View.VISIBLE else View.GONE
                 binding.rvTransactions.visibility = if (!it) View.VISIBLE else View.GONE
             }
-//            viewModel.isLoading().subscribe {
-//                binding.swipeRefresh.isRefreshing = it
-//                binding.recyclerView.visibility = if (it) View.GONE else View.VISIBLE
-//            }
         )
     }
 
@@ -73,7 +69,6 @@ class WalletsFragment @Inject constructor(
 
             walletsSnapHelper.attachToRecyclerView(this)
             layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
-//            addOnScrollListener(CarouselScroller())
             swapAdapter(walletsAdapter, false)
             setHasFixedSize(true)
         }
