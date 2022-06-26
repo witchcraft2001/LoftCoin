@@ -1,13 +1,11 @@
 package com.dmdev.loftcoin.data.repository
 
 import com.dmdev.loftcoin.data.api.CmcApi
-import com.dmdev.loftcoin.data.models.Coin
-import com.dmdev.loftcoin.data.models.CoinsQuery
-import com.dmdev.loftcoin.data.models.RoomCoin
-import com.dmdev.loftcoin.data.models.SortBy
+import com.dmdev.loftcoin.data.models.*
 import com.dmdev.loftcoin.data.models.mappers.CoinsMapper
 import com.dmdev.loftcoin.data.room.LoftCoinDatabase
 import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -29,6 +27,12 @@ class CmcCoinsRepo @Inject constructor(
             .subscribeOn(Schedulers.io())
             .map { it }
     }
+
+    override fun coin(currency: Currency, id: Long): Single<Coin> =
+        listings(CoinsQuery(currency = currency.code, forceUpdate = false))
+            .switchMapSingle { db.coins().fetchOne(id) }
+            .firstOrError()
+            .map { it }
 
     private fun fetchFromDb(query: CoinsQuery): Observable<List<RoomCoin>> =
         if (query.sortBy == SortBy.RANK) {

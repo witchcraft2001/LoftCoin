@@ -7,6 +7,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.dmdev.loftcoin.data.models.RoomCoin
 import io.reactivex.Observable
+import io.reactivex.Single
 
 @Dao
 interface CoinsDao {
@@ -25,4 +26,7 @@ interface CoinsDao {
     @WorkerThread
     @Query("SELECT COUNT(id) FROM RoomCoin")
     fun coinsCount() : Int
+
+    @Query("SELECT * from RoomCoin WHERE id = :id")
+    fun fetchOne(id: Long) : Single<RoomCoin>
 }
