@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'kotlin-android'
+    id 'com.google.gms.google-services'
 }
 
 def apiPropertiesFile = rootProject.file("api.properties")
@@ -89,4 +90,7 @@ dependencies {
 
     //timber
     implementation 'com.jakewharton.timber:timber:5.0.1'
+
+    //Firebase
+    implementation platform('com.google.firebase:firebase-bom:30.2.0')
 }
