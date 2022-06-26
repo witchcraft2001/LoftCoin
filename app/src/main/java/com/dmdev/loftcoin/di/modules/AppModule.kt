@@ -2,6 +2,8 @@ package com.dmdev.loftcoin.di.modules
 
 import android.app.Application
 import android.content.Context
+import android.content.SharedPreferences
+import com.dmdev.loftcoin.BuildConfig
 import dagger.Module
 import dagger.Provides
 import java.util.concurrent.Executors
@@ -13,6 +15,13 @@ class AppModule {
     @Singleton
     @Provides
     fun provideContext(app: Application): Context = app.applicationContext
+
+    @Singleton
+    @Provides
+    fun providePreferences(app: Application): SharedPreferences = app.getSharedPreferences(
+        BuildConfig.APPLICATION_ID,
+        Context.MODE_PRIVATE
+    )
 
     @Singleton
     @Provides
