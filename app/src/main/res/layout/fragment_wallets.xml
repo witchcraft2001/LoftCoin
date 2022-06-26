@@ -51,7 +51,7 @@
 
     <View
         android:id="@+id/layout_add_wallet"
-        android:layout_width="240dp"
+        android:layout_width="?attr/walletCardWidth"
         android:layout_height="160dp"
         android:layout_marginVertical="24dp"
         android:background="@drawable/round_background"

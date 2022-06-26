@@ -7,6 +7,7 @@ import com.dmdev.loftcoin.data.room.LoftCoinDatabase
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -29,7 +30,7 @@ class CmcCoinsRepo @Inject constructor(
     }
 
     override fun coin(currency: Currency, id: Long): Single<Coin> =
-        listings(CoinsQuery(currency = currency.code, forceUpdate = false))
+        listings(CoinsQuery(currency = currency.code, forceUpdate = true))
             .switchMapSingle { db.coins().fetchOne(id) }
             .firstOrError()
             .map { it }

@@ -27,6 +27,6 @@ interface CoinsDao {
     @Query("SELECT COUNT(id) FROM RoomCoin")
     fun coinsCount() : Int
 
-    @Query("SELECT * from RoomCoin WHERE id = :id")
+    @Query("SELECT * from RoomCoin WHERE id=:id")
     fun fetchOne(id: Long) : Single<RoomCoin>
 }

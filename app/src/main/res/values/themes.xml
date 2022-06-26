@@ -10,6 +10,7 @@
         <item name="textAppearanceHeadline2">@style/TextAppearance.Theme.LoftCoin.H2</item>
         <item name="textAppearanceHeadline3">@style/TextAppearance.Theme.LoftCoin.H3</item>
         <item name="textAppearanceHeadline4">@style/TextAppearance.Theme.LoftCoin.H4</item>
+        <item name="walletCardWidth">240dp</item>
     </style>
 
     <style name="Theme.LoftCoin.SemiRoundButton" parent="@style/Widget.AppCompat.Button.Borderless">
