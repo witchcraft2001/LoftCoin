@@ -7,10 +7,7 @@ import com.dmdev.loftcoin.data.api.ApiKeyInterceptor
 import com.dmdev.loftcoin.data.api.CmcApi
 import com.dmdev.loftcoin.data.models.CmcCoin
 import com.dmdev.loftcoin.data.models.Listings
-import com.dmdev.loftcoin.data.repository.CmcCoinsRepo
-import com.dmdev.loftcoin.data.repository.CoinsRepo
-import com.dmdev.loftcoin.data.repository.CurrencyRepo
-import com.dmdev.loftcoin.data.repository.CurrencyRepoImpl
+import com.dmdev.loftcoin.data.repository.*
 import com.dmdev.loftcoin.data.room.LoftCoinDatabase
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -32,6 +29,9 @@ abstract class DataModule {
 
     @Binds
     abstract fun bindCurrencyRepo(repo: CurrencyRepoImpl) : CurrencyRepo
+
+    @Binds
+    abstract fun bindWalletsRepo(repo: WalletsRepoImpl) : WalletsRepo
 
     @Module
     companion object {
