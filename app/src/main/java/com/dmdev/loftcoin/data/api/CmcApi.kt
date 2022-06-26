@@ -1,7 +1,7 @@
 package com.dmdev.loftcoin.data.api
 
 import com.dmdev.loftcoin.data.models.Listings
-import retrofit2.Call
+import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -11,5 +11,5 @@ interface CmcApi {
     }
 
     @GET("cryptocurrency/listings/latest")
-    fun listings(@Query("convert") convert: String): Call<Listings>
+    fun listings(@Query("convert") convert: String): Observable<Listings>
 }
