@@ -10,5 +10,8 @@
     <string name="title_wallets">Кошельки</string>
     <string name="title_rates">Курс</string>
     <string name="title_converter">Конвертер</string>
+    <string name="usd">US Dollar</string>
+    <string name="eur">Euro</string>
+    <string name="rub">Рубль</string>
 
 </resources>

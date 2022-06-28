@@ -1,14 +1,12 @@
 package com.dmdev.loftcoin.data.repository
 
-import androidx.annotation.WorkerThread
-import androidx.lifecycle.LiveData
-import com.dmdev.loftcoin.data.models.CmcCoin
 import com.dmdev.loftcoin.data.models.Coin
 import com.dmdev.loftcoin.data.models.CoinsQuery
+import com.dmdev.loftcoin.data.models.Currency
+import io.reactivex.Observable
+import io.reactivex.Single
 
 interface CoinsRepo {
-    @WorkerThread
-    fun listings(currency: String) : List<CmcCoin>
-
-    fun listings(query: CoinsQuery): LiveData<List<Coin>>
+    fun listings(query: CoinsQuery): Observable<List<Coin>>
+    fun coin(currency: Currency, id: Long): Single<Coin>
 }

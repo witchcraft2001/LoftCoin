@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'kotlin-android'
+    id 'com.google.gms.google-services'
 }
 
 def apiPropertiesFile = rootProject.file("api.properties")
@@ -61,6 +62,7 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
     //RxJava
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.21'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
 
     //retrofit
@@ -68,6 +70,7 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
 
     //moshi
     implementation "com.squareup.moshi:moshi-kotlin:$moshi_version"
@@ -82,8 +85,13 @@ dependencies {
 
     //Room
     implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.room:room-rxjava2:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
     //timber
     implementation 'com.jakewharton.timber:timber:5.0.1'
+
+    //Firebase
+    implementation platform('com.google.firebase:firebase-bom:30.2.0')
+    implementation 'com.google.firebase:firebase-firestore-ktx'
 }

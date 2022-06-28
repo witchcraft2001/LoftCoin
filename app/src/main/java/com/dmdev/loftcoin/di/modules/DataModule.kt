@@ -7,8 +7,7 @@ import com.dmdev.loftcoin.data.api.ApiKeyInterceptor
 import com.dmdev.loftcoin.data.api.CmcApi
 import com.dmdev.loftcoin.data.models.CmcCoin
 import com.dmdev.loftcoin.data.models.Listings
-import com.dmdev.loftcoin.data.repository.CmcCoinsRepo
-import com.dmdev.loftcoin.data.repository.CoinsRepo
+import com.dmdev.loftcoin.data.repository.*
 import com.dmdev.loftcoin.data.room.LoftCoinDatabase
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -18,6 +17,7 @@ import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
@@ -26,6 +26,12 @@ abstract class DataModule {
 
     @Binds
     abstract fun bindRepo(repo: CmcCoinsRepo) : CoinsRepo
+
+    @Binds
+    abstract fun bindCurrencyRepo(repo: CurrencyRepoImpl) : CurrencyRepo
+
+    @Binds
+    abstract fun bindWalletsRepo(repo: WalletsRepoImpl) : WalletsRepo
 
     @Module
     companion object {
@@ -60,6 +66,7 @@ abstract class DataModule {
                     client(okHttpClient)
                     baseUrl(BuildConfig.API_ENDPOINT)
                     addConverterFactory(MoshiConverterFactory.create(moshi))
+                    addCallAdapterFactory(RxJava2CallAdapterFactory.createAsync())
                 }
                 .build()
 

@@ -14,6 +14,7 @@ import com.dmdev.loftcoin.di.components.BaseComponent
 import com.dmdev.loftcoin.di.components.DaggerRatesComponent
 import com.dmdev.loftcoin.utils.PercentageFormatter
 import com.dmdev.loftcoin.utils.PriceFormatter
+import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
 class RatesFragment @Inject constructor(
@@ -28,25 +29,30 @@ class RatesFragment @Inject constructor(
 
     private val component = DaggerRatesComponent.builder().baseComponent(baseComponent).build()
 
+    private val disposable = CompositeDisposable()
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         super.onCreateView(inflater, container, savedInstanceState)
         binding = FragmentRatesBinding.inflate(layoutInflater)
 
-        initAdapter()
-        initObservers()
-        initListeners()
-
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        initAdapter()
+        initObservers()
+        initListeners()
+    }
+
     private fun initObservers() {
-        viewModel.coins.observe(viewLifecycleOwner) { list ->
-            ratesAdapter.submitList(list)
-        }
-        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
-            binding.swipeRefresh.isRefreshing = isLoading
-            binding.recyclerView.visibility = if (isLoading) GONE else VISIBLE
-        }
+        disposable.addAll(
+            viewModel.getCoins().subscribe { ratesAdapter.submitList(it) },
+            viewModel.isLoading().subscribe {
+                binding.swipeRefresh.isRefreshing = it
+                binding.recyclerView.visibility = if (it) GONE else VISIBLE }
+        )
     }
 
     private fun initListeners() {
@@ -65,6 +71,7 @@ class RatesFragment @Inject constructor(
 
     override fun onDestroyView() {
         binding.recyclerView.swapAdapter(null, false)
+        disposable.clear()
         super.onDestroyView()
     }
 }

@@ -1,17 +1,24 @@
 package com.dmdev.loftcoin.data.room
 
 import androidx.annotation.WorkerThread
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.dmdev.loftcoin.data.models.RoomCoin
+import io.reactivex.Observable
+import io.reactivex.Single
 
 @Dao
 interface CoinsDao {
     @Query("SELECT * from RoomCoin")
-    fun fetchAll(): LiveData<List<RoomCoin>>
+    fun fetchAll(): Observable<List<RoomCoin>>
+
+    @Query("SELECT * from RoomCoin ORDER BY rank")
+    fun fetchAllOrderedByRank(): Observable<List<RoomCoin>>
+
+    @Query("SELECT * from RoomCoin ORDER BY price")
+    fun fetchAllOrderedByPrice(): Observable<List<RoomCoin>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(coins: List<RoomCoin>)
@@ -19,4 +26,7 @@ interface CoinsDao {
     @WorkerThread
     @Query("SELECT COUNT(id) FROM RoomCoin")
     fun coinsCount() : Int
+
+    @Query("SELECT * from RoomCoin WHERE id=:id")
+    fun fetchOne(id: Long) : Single<RoomCoin>
 }
