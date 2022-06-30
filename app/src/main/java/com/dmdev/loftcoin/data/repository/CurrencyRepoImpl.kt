@@ -9,7 +9,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class CurrencyRepoImpl @Inject constructor(
+open class CurrencyRepoImpl @Inject constructor(
     context: Context,
     private val prefereces: SharedPreferences
 ) : CurrencyRepo {
@@ -17,11 +17,14 @@ class CurrencyRepoImpl @Inject constructor(
         private const val KEY_CURRENCY = "KEY_CURRENCY"
     }
 
-    private val currencies: HashMap<String, Currency> = hashMapOf(
-        "USD" to Currency("USD", "$", context.getString(R.string.usd)),
-        "EUR" to Currency("EUR", "€", context.getString(R.string.eur)),
-        "RUB" to Currency("RUB", "₽", context.getString(R.string.rub)),
-    )
+    private val currencies: HashMap<String, Currency> by lazy {
+        hashMapOf(
+            "USD" to Currency("USD", "$", context.getString(R.string.usd)),
+            "EUR" to Currency("EUR", "€", context.getString(R.string.eur)),
+            "RUB" to Currency("RUB", "₽", context.getString(R.string.rub))
+        )
+    }
+
 
     override fun availableCurrencies() = Observable.just(currencies.values.toList())
 
