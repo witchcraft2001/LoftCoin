@@ -7,10 +7,6 @@ import com.dmdev.loftcoin.BuildConfig
 import com.dmdev.loftcoin.data.FakeCoin
 import com.dmdev.loftcoin.data.FakeCoinsRepo
 import com.dmdev.loftcoin.data.FakeCurrencyRepo
-import com.dmdev.loftcoin.data.repository.CoinsRepo
-import com.dmdev.loftcoin.data.repository.CurrencyRepo
-import org.junit.Assert.*
-
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -39,10 +35,10 @@ class RatesViewModelTest {
     @Test
     fun coins() {
         val coinTests = viewModel.getCoins().test()
-//        viewModel.isLoading().test().assertValue(true)
+        viewModel.isLoading().test().assertValue(true)
         val coins = listOf(FakeCoin(), FakeCoin())
         coinsRepo.listings.onNext(coins)
-//        viewModel.isLoading().test().assertValue(false)
+        viewModel.isLoading().test().assertValue(false)
         coinTests.assertValue(coins)
     }
 }
